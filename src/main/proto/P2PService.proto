@@ -1,0 +1,29 @@
+syntax="proto3";
+package it.maurosaladino.sdp.Proto;
+
+message NotifyRequest {
+  int32 id = 1;
+  string ip = 2;
+  int32 listeningPort = 3;
+}
+
+message NotifyRequestDelete {
+  int32 id_delete = 1;
+  int32 id_add = 2;
+  string ip_add = 3;
+  int32 listeningPort_add = 4;
+}
+
+message NotifyResponse {
+  enum Status {
+    OK = 0;
+  }
+  Status status = 1;
+}
+
+service P2PService {
+  rpc notifyNext(NotifyRequest) returns (NotifyResponse);
+  rpc notifyPrevious(NotifyRequest) returns (NotifyResponse);
+  rpc notifyNextDelete(NotifyRequestDelete) returns (NotifyResponse);
+  rpc notifyPreviousDelete(NotifyRequestDelete) returns (NotifyResponse);
+}

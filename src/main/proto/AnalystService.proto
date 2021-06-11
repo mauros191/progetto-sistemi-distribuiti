@@ -1,0 +1,22 @@
+syntax="proto3";
+package it.maurosaladino.sdp.Proto;
+
+message PushNotification {
+  enum Type {
+    NEW_STATISTIC = 0;
+    NEW_NODE = 1;
+    EXIT_NODE = 2;
+  }
+  Type type = 1;
+}
+
+message PushResponse {
+  enum Status {
+    OK = 0;
+  }
+  Status status = 1;
+}
+
+service AnalystService {
+  rpc sendPush(PushNotification) returns (PushResponse);
+}
